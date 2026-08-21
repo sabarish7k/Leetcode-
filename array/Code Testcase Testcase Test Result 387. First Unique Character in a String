@@ -1,0 +1,17 @@
+//by creating freaquecy array we first find the repetetion of characters from string and by
+//travesing the string and verifying the freauency of characters and  returning the first non repeating element
+
+
+
+int firstUniqChar(char* s) {
+    int arr[26]={0};
+    for(int i=0;i<strlen(s);i++){
+        arr[s[i]-'a']++;
+    }
+    for(int i=0;i<strlen(s);i++){
+        if(arr[s[i]-'a']==1){
+            return i;
+        }
+    }
+    return -1;
+}
