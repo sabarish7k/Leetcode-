@@ -1,0 +1,14 @@
+""" the question doesn't bother what element lies beyond the first non equivalnt of the given element and then we have to return count  """
+
+int removeElement(int* nums, int numsSize, int val) {
+    int count=0;
+    for(int i=0;i<numsSize;i++){
+        if(nums[i]!=val){
+           nums[count]=nums[i];
+           count++;
+        }
+
+    }
+   
+    return count;
+}
