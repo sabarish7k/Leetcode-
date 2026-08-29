@@ -1,0 +1,21 @@
+"""
+   TECHNIQUE USED IS TWO POINTER BY COMPARING ELEMENTS WITH TWO POINTER WE REOVES THE DUPLICATE  ELEMENT FROM THE SOTRTED ARRAY 
+
+TIME COMPLEXITY =O(N)
+SPACE COMPLEXITY=O(1)
+
+"""
+
+int removeDuplicates(int* nums, int numsSize) {
+    int l=0,r=1,count=1;
+   while(r<=numsSize-1){
+    if(nums[l]!=nums[r]){
+        nums[l+1]=nums[r];
+        l=l+1;
+        count++;
+    }
+
+    r++;
+   }
+   return count;
+}
