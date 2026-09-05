@@ -1,0 +1,99 @@
+# 242. Valid Anagram
+code
+bool isAnagram(char* s, char* t) {
+   if(strlen(s)!=strlen(t)){
+    return false;
+   }
+    int hash1[26]={0};
+    int hash2[26]={0};
+    for(int i=0;i<strlen(s);i++){
+        hash1[s[i]-'a']++;
+        hash2[t[i]-'a']++;
+    }
+    for(int i=0;i<26;i++){
+        if(hash1[i]!=hash2[i]){
+            return false ;
+        }
+    }
+    return true;
+}
+
+## Problem
+
+Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `false` otherwise.
+An anagram contains the same characters with the same frequency, but the order can be different.
+
+## Approach
+
+This solution uses **Hashing / Frequency Counting**.
+
+Two hash arrays of size 26 are created:
+
+* `hash1[26]` stores the frequency of characters in `s`.
+* `hash2[26]` stores the frequency of characters in `t`.
+
+The expression:
+
+```c
+s[i] - 'a'
+```
+
+converts a lowercase alphabet character into an index from `0` to `25`.
+
+For example:
+
+```text
+'a' - 'a' = 0
+'b' - 'a' = 1
+'c' - 'a' = 2
+...
+'z' - 'a' = 25
+```
+
+After calculating the frequencies, both hash arrays are compared.
+
+If any frequency is different, the strings are not anagrams.
+
+## Example
+
+### Input
+
+```text
+s = "anagram"
+t = "nagaram"
+```
+
+### Output
+
+```text
+true
+```
+
+### Another Example
+
+```text
+s = "rat"
+t = "car"
+```
+
+### Output
+
+```text
+false
+```
+
+
+
+
+* **Time Complexity:** `O(n)`
+* **Space Complexity:** `O(1)`
+
+The space is `O(1)` because the hash arrays always contain only 26 elements.
+
+## Topic
+
+**Strings + Hashing / Frequency Counting**
+
+## LeetCode
+
+**Problem #242 – Valid Anagram**
