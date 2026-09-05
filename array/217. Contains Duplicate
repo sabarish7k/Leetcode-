@@ -1,0 +1,98 @@
+#include <stdbool.h>
+#include <stdlib.h>
+
+bool containsDuplicate(int* nums, int numsSize) {
+
+    int size = numsSize * 2 + 1;
+    int* hash = malloc(size * sizeof(int));
+    bool* used = calloc(size, sizeof(bool));
+
+    for(int i = 0; i < numsSize; i++) {
+
+        int index = (nums[i] % size + size) % size;
+
+        while(used[index]) {
+
+            if(hash[index] == nums[i]) {
+                free(hash);
+                free(used);
+                return true;
+            }
+
+            index = (index + 1) % size;
+        }
+
+        hash[index] = nums[i];
+        used[index] = true;
+    }
+
+    free(hash);
+    free(used);
+
+    return false;
+}
+
+# 217. Contains Duplicate
+
+## Problem
+
+Given an integer array `nums`, return `true` if any value appears at least twice in the array.
+
+Return `false` if every element in the array is distinct.
+
+## Approach
+
+This solution uses a **Hash Set / Hash Table** with **Linear Probing**.
+
+Since C does not have a built-in HashSet, two arrays are used:
+
+* `hash[]` stores the values.
+* `used[]` tells whether a position in the hash table is occupied.
+
+### Hash Function
+
+```c
+int index = (nums[i] % size + size) % size;
+```
+
+This converts the number into a valid array index.
+
+The extra `+ size` handles negative numbers correctly.
+
+### Collision Handling
+
+Different values can produce the same hash index. When this happens, **linear probing** is used:
+
+```c
+index = (index + 1) % size;
+```
+
+The program checks the next position until it finds either:
+
+* The same number → duplicate found.
+* An empty position → insert the number.
+
+
+
+## Complexity
+
+* **Average Time Complexity:** `O(n)`
+* **Worst-case Time Complexity:** `O(n²)`
+* **Space Complexity:** `O(n)`
+
+## Concepts Used
+
+* Arrays
+* Hashing
+* Hash Table
+* Hash Function
+* Collision Handling
+* Linear Probing
+* Dynamic Memory Allocation
+* Pointers
+
+## LeetCode
+
+**Problem #217 – Contains Duplicate**
+
+**Topic:** Array + Hashing
