@@ -1,0 +1,41 @@
+## Shuffle the Array
+
+- **LeetCode:** 1470
+- **Technique:** Array
+- **Language:** C
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n)
+
+### Approach
+The first `n` elements are stored at even indices of the result array, while the next `n` elements are stored at odd indices.
+
+Example:
+
+`[x1,x2,x3,y1,y2,y3]`
+
+becomes
+
+`[x1,y1,x2,y2,x3,y3]`
+
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* shuffle(int* nums, int numsSize, int n, int* returnSize){
+    *returnSize=numsSize;
+    int* arr=malloc(numsSize*sizeof(int));
+    int l=0;
+    for(int i=0;i<n*2;i+=2){
+       arr[i]=nums[l];
+        l++;
+    }
+    int r=n;
+    for(int i=1;i<2*n;i+=2){
+        arr[i]=nums[r];
+        r++;
+      
+    }
+    return arr;
+
+}
