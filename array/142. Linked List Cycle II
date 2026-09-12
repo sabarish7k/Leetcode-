@@ -1,0 +1,85 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode *detectCycle(struct ListNode *head) {
+    if(head==NULL || head->next==NULL){
+        return NULL;
+    }
+    struct ListNode* slow=head;
+    struct ListNode* fast=head;
+    while(fast->next!=NULL && fast!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(fast==NULL){
+            return NULL;
+        }
+        if(slow==fast){
+       break;
+        }
+
+    }
+    if(fast->next!=NULL && fast!=NULL){
+    slow=head;
+          while(slow != fast){
+             fast = fast->next;
+        slow = slow->next;
+    }
+    return slow;
+    }
+    return NULL;
+     
+
+    
+}
+
+# 142. Linked List Cycle II
+
+## Problem
+
+Given the head of a linked list, return the node where the cycle begins.
+
+If there is no cycle, return `NULL`.
+
+## Approach
+
+Use Floyd's Cycle Detection Algorithm (Slow and Fast Pointers).
+
+- `slow` moves one node at a time.
+- `fast` moves two nodes at a time.
+- If there is no cycle, `fast` eventually becomes `NULL`.
+- If there is a cycle, `slow` and `fast` will meet.
+- After they meet, reset `slow` to `head`.
+- Move both pointers one step at a time.
+- The point where they meet again is the starting node of the cycle.
+
+## Algorithm
+
+1. Initialize `slow` and `fast` at `head`.
+2. Move `slow` by one step and `fast` by two steps.
+3. If `slow == fast`, a cycle exists.
+4. If `fast == NULL` or `fast->next == NULL`, return `NULL`.
+5. Reset `slow` to `head`.
+6. Move both pointers one step at a time.
+7. Return the node where they meet.
+
+## Complexity
+
+- Time Complexity: O(n)
+- Space Complexity: O(1)
+
+## Key Concept
+
+Floyd's Cycle Detection Algorithm
+
+## Important C Point
+
+Always check `fast` before accessing `fast->next`.
+
+Correct:
+
+```c
+while (fast != NULL && fast->next != NULL)
