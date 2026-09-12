@@ -1,0 +1,72 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+bool hasCycle(struct ListNode *head) {
+
+    if (head == NULL || head->next == NULL) {
+        return false;
+    }
+
+    struct ListNode* slow = head;
+    struct ListNode* fast = head;
+
+    while (fast != NULL && fast->next != NULL) {
+
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+# 141. Linked List Cycle
+
+## Problem
+
+Given the head of a linked list, determine if the linked list contains a cycle.
+
+A cycle exists when a node's `next` pointer points back to a previous node in the list instead of pointing to `NULL`.
+
+## Approach
+
+I used **Floyd's Cycle Detection Algorithm**, also called the **Slow and Fast Pointer technique**.
+
+* `slow` moves one node at a time.
+* `fast` moves two nodes at a time.
+* If there is a cycle, `slow` and `fast` will eventually meet.
+* If there is no cycle, `fast` will reach `NULL`.
+
+## Algorithm
+
+1. Initialize `slow` and `fast` at the head.
+2. Move `slow` one step.
+3. Move `fast` two steps.
+4. If `slow == fast`, a cycle exists.
+5. If `fast == NULL` or `fast->next == NULL`, there is no cycle.
+6. Return the result.
+
+## Complexity
+
+* Time Complexity: `O(n)`
+* Space Complexity: `O(1)`
+
+## Key Concept
+
+This problem uses the **Two Pointer technique** on a linked list.
+
+The important condition is:
+
+```c
+while (fast != NULL && fast->next != NULL)
+```
+
+`fast` must be checked before accessing `fast->next` to avoid a null-pointer error.
