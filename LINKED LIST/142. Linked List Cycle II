@@ -1,0 +1,63 @@
+# Linked List Cycle II
+
+LeetCode 142 - Linked List Cycle II
+
+## Approach
+
+Used **Floyd's Cycle Detection Algorithm**.
+
+1. Use two pointers: `slow` and `fast`.
+2. Move `slow` one step and `fast` two steps.
+3. If they meet, a cycle exists.
+4. Move `slow` back to the head.
+5. Move both pointers one step at a time.
+6. The point where they meet is the starting node of the cycle.
+7. If `fast` reaches `NULL`, there is no cycle.
+
+## Complexity
+
+* Time Complexity: O(n)
+* Space Complexity: O(1)
+
+## Language
+
+C
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode *detectCycle(struct ListNode *head) {
+    if(head==NULL || head->next==NULL){
+        return NULL;
+    }
+    struct ListNode* slow=head;
+    struct ListNode* fast=head;
+    while(fast->next!=NULL && fast!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(fast==NULL){
+            return NULL;
+        }
+        if(slow==fast){
+       break;
+        }
+
+    }
+    if(fast->next!=NULL && fast!=NULL){
+    slow=head;
+          while(slow != fast){
+             fast = fast->next;
+        slow = slow->next;
+    }
+    return slow;
+    }
+    return NULL;
+     
+
+    
+}
