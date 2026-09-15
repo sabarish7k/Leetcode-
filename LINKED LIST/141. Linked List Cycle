@@ -1,0 +1,56 @@
+# Linked List Cycle
+
+LeetCode 141 - Linked List Cycle
+
+## Approach
+
+Used **Floyd's Cycle Detection Algorithm** (Tortoise and Hare).
+
+* `slow` moves one node at a time.
+* `fast` moves two nodes at a time.
+* If there is a cycle, `slow` and `fast` will eventually meet.
+* If `fast` reaches `NULL`, there is no cycle.
+
+## Complexity
+
+* Time Complexity: O(n)
+* Space Complexity: O(1)
+
+## Language
+
+C
+
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+bool hasCycle(struct ListNode *head) {
+     if(head==NULL || head->next==NULL){
+        return false;
+    }
+    struct ListNode* slow=head;
+    struct ListNode* fast=head;
+    if(head==NULL || head->next==NULL){
+        return false;
+    }
+    while(fast->next!=NULL && fast!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+       
+        if(slow==fast){
+            return true;
+        }
+        if(fast==NULL){
+            return false;
+        }
+      
+        
+    }
+
+return false;
+}
