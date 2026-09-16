@@ -1,0 +1,39 @@
+""" WE ARE USING THE STACK TO FIND WHETEHR THE GIVEN STRING IS VALID PARENTHESIS OR NOT """
+
+class Solution {
+    public boolean isValid(String s) {
+        if(s.length()==1){
+            return false;
+        }
+    Stack<Character> st = new Stack<>();
+        int count=0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='(' || s.charAt(i)=='{' || s.charAt(i)=='['){
+                st.push(s.charAt(i));
+                count++;
+        }
+        else{
+            if(count==0){
+                return false;
+            }
+            char t=st.pop();
+            if(s.charAt(i)==')' && t=='('){
+                count--;
+            }
+            else if(s.charAt(i)=='}' && t=='{'){
+                count--;
+            }
+            else if(s.charAt(i)==']' && t=='['){
+                count--;
+            }
+            else{
+                return false;
+            }
+        }
+    }
+    if(count==0){
+        return true;
+    }
+   return false;
+}
+}
